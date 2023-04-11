@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" id="addElmt" value="요소추가">
+
+    <script src="../js/random.js"></script>
+    <script>
+        // DOM Search Method사용
+        let v_addE = document.querySelector('#addElmt');
+
+        let v_idx = 1; // 요소 numbering index
+
+        // 이벤트 부여하는 정석
+        v_addE.addEventListener('click', function () {
+
+            // DOM Element생성 - document.createElement('tag');
+            let v_h1 = document.createElement('h1'); // <h1></h1>
+            v_h1.innerText = "요소 생성" + v_idx;
+            v_h1.style.color = f_ranColor();; // 색상을 랜덤으로 설정하기..
+            v_h1.style.backgroundColor = f_ranColor();
+            document.body.appendChild(v_h1);
+
+            v_idx++;
+        });
+
+        function f_ranColor() {
+            let random = [];
+            for (let i = 0; i < 3; i++) {
+                const RND = f_random(0, 255);
+                random[i] = RND;
+            }
+            return `rgb(${random})`;
+        }
+
+    </script>
+</body>
+
+</html>
