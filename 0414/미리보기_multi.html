@@ -20,6 +20,7 @@ div {
     v_fBtn.addEventListener('change', function() {
 
         let v_files = this.files; // 하나의 정보만 얻음
+
         let length = (v_files.length > 5) ? 5 : v_files.length;
         for (let i = 0; i < length; i++) {
             let frd = new FileReader();
