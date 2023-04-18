@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(function() {
+
+    $('[value=text]').on('click', function() {
+        // 모든 대상요소의 태그를 제외한 문자 반환받음
+        console.log($('p').text());
+    });
+
+    $('[value=html]').click(function() {
+        // p요소중 첫번째 p요소의 태그를 포함한 문자 반환받음
+        console.log($('p').html());
+    });
+
+    // each() - jQuery에서 사용하는 반복메서드
+    $('[value=each]').on('click', function() {
+        $('p').each(function(i, v) { // 콜백함수의 매개변수는 사용하지 않을 경우 생략가능
+            // console.log(i); // 대상요소('p')의 index 값을 반환
+            // console.log(v); // 대상요소('p')의 순차적인 값을 반환
+            // console.log(this); // 대상요소('p')의 순차적인 값을 반환
+
+            // console.log($('p').html()); // ?? - 첫번째 항목의 값만 3회 출력함
+            // console.log($(this).html()); // ?? - this키워드로 p요소의 순차적인 값 반환받음
+            // console.log($(v).html());
+            console.log($('p').eq(i).html());
+        });
+    });
+
+    $('input').eq(3).on('click', function() {
+
+        // 객체 생성
+        let obj = {
+            'j' : 'ava',
+            's' : 'cript',
+            'o' : 'bject'
+        };
+
+        // 객체(배열을 포함)를 대상으로 하는 each()문법 - $.each(object, callbackfn)
+        // 객체가 가진 갯수만큼 callback함수를 반복 호출함
+        // 대상요소가 array일때 i는 index정보 반환, object일때 key정보를 반환
+        $.each(obj, function(i, v) {
+            // alert(this); // 순차적인 값(value) 반환받음
+            // alert("매개변수로v로 순자적인 값 반환>>" + v);
+            // alert(i);
+        });
+
+        // 요소(element, 선택자)를 대상으로 하는 each()문법 - $(elem).each(function(){});
+        $(obj).each(function() {
+            console.log(this);
+            console.log(this.s); // cript
+        });
+
+        // 객체 대상 each()문법에 요소 적용해보기
+        // 객체가 가진 갯수만큼 callback함수를 반복 호출하는 문법이지만 요소는 적용대상이 아님으로 에러 발생
+        $.each('p', function(){
+            console.log(this); //??
+        });
+    });
+});
+</script>
+</head>
+<body>
+    <p>1<span>백두산</span></p>
+    <p>2<span>한라산</span></p>
+    <p>3<span>금강산</span></p>
+
+    <input type="button" value="text">
+    <input type="button" value="html">
+    <input type="button" value="each">
+    <input type="button" value="대상별 each문법">
+</body>
+</html>

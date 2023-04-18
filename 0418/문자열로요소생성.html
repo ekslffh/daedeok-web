@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+// $(document).ready(function(){});
+$(function() {
+    let v_idx = 1;
+
+    $('input').eq(0).on('click', function() {
+        // alert("첫번째 버튼");
+        let v_pTag = $("<p title='★말풍선' onclick='f_fnc(this)'>Hi★ jQuery!!" + v_idx + "</p>")
+        $('div').append(v_pTag);
+        // $('div').appendChild(v_pTag); // node만 대상으로 추가해줌
+        v_idx++;
+    });
+
+    $('input').eq(1).click(function() {
+        let v_pTag = $("<p></p>", {
+            'title' : '♥♥',
+            'text' : 'Hello♥ jQuery~~',
+            // '클릭했을때'의 이벤트 발생(사용자의 동작) 발생해야 핸들러 연결
+            'click' : function() {
+            // 이벤트 핸들러가 작동하여 관련 실행문(스타일정의)을 실행
+            // 'onclick' : function() { 
+                $(this).css('color', 'gold')
+                        .css('backgroundColor', 'navy')
+                        .css('display', 'inline');
+            }
+        });
+        // append(), appendTo()의 기능은 완벽하게 같음
+        // $('div').append(v_pTag); // 부모.append(자식)
+        $(v_pTag).appendTo('body'); // 자식.appendTo(부모)
+    });
+});
+
+// 함수 안(현재 기준 문서준비코드함수)에 정의된 내부함수는 외부에서 참조할 수 없음!
+function f_fnc(p_this) {
+    // alert("각 요소를 매개변수로 받음" + $(p_this).text());
+    $(p_this).css('color', 'orange').css('fontSize', '1.3em').css('text-shadow', '2px 2px 2px red');
+}
+</script>
+</head>
+<body>
+    <input type="button" value="문자열로 일괄 생성">
+    <input type="button" value="문자열로 요소 생성 후 세부속성 정의">
+    <div>
+        <!-- 나는 블럭요소(100%너비값을 가짐)이기 때문에 다음 -->
+    </div>
+</body>
+</html>

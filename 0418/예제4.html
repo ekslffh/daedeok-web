@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    $(function() {
+        // jQuery방식 요소 생성하기 - 문자열을 $()의 인자로 넣기
+        let v_btn = $("<button onclick='f_img()'>이미지추가</button>");
+
+        let v_btn2 = $("<button>이미지추가2</button>");
+
+        $(v_btn2).click(function() {
+            let v_img = $("<img>", {
+            'src' : '../images/호빵맨.jpg',
+            'alt' : '호빵맨',
+            'width' : '100px',
+            'heigh' : '100px',
+            'click' : function() {
+                $(this).css('border', '2px dashed blue')
+            }
+        });
+        $(v_img).appendTo('body');
+        });
+        $(v_btn).appendTo('body'); // document영역에 button요소 삽입
+        $(v_btn2).appendTo('body'); 
+    });
+
+    // 이미지추가
+    function f_img() {
+        let v_img = $("<img>", {
+            'src' : '../images/너굴맨.jpg',
+            'alt' : '너굴맨',
+            'width' : '100px',
+            'heigh' : '100px',
+            'click' : function() {
+                $(this).css('border', '2px dashed red')
+            }
+        });
+        $(v_img).appendTo('body');
+    }
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    // 문서의 요소가 스크립트보다 아래 위치할 때, 문서를 먼저 준비시킬 코드 필요
+    // $(document).ready(function(){}); // 기본 문법
+    // 더 축약하여 쓰는 방식이며, 많이 사용함
+    $(function() {
+        // jQuery에서 스타일 지정시 css('key', 'value') 메소드 사용
+        // $('input').css('color','red');
+
+        // $(selector, context) - context 범위에서의 selector만 선택
+        $('input', '#frm2').css('color','red');
+
+        $('form').on('click', function() {
+            $('input').css('backgroundColor', 'white'); // 모든 요소 배경색 초기화
+            $('input', this).css('backgroundColor', 'gold');
+        });
+    });
+</script>
+</head>
+<body>
+    <!-- $('selector', context)
+    선택자를 검색할 범위를 설정, 생략시 문서 전체에서 선택자를 검색한다 -->
+
+    <form id="frm1">
+        <input> <!-- type=text는 기본값이라서 생략가능 -->
+    </form>
+
+    <form id="frm2">
+        <input> <!-- type=text는 기본값이라서 생략가능 -->
+    </form>
+
+    <form id="frm3">
+        <input> <!-- type=text는 기본값이라서 생략가능 -->
+    </form>
+
+</body>
+</html>

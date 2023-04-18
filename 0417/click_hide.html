@@ -26,6 +26,16 @@ button {
         <h4>click hide 4</h4>
         <button>보이기</button>
     </div>
+
+    <hr>
+
+    <div id="jq">
+        <h4>click hide 1</h4>
+        <h4>click hide 2</h4>
+        <h4>click hide 3</h4>
+        <h4>click hide 4</h4>
+        <button>보이기</button>
+    </div>
 <script>
     function fnc(p_this) {
         // alert(p_this.innerText);
@@ -40,7 +50,7 @@ button {
     // window.addEventListener('load', function() {
         let js_h4s = document.querySelectorAll('#js h4');
         let v_btn = document.querySelector('button');
-        // console.log(js_h4s);
+        // // console.log(js_h4s);
         let v_cnt = 0;
         for (let i = 0; i < js_h4s.length; i++) {
             
@@ -60,14 +70,33 @@ button {
         v_btn.addEventListener('click', function() {
             // 숨겨진 헤드라인 요소 다시 보여주기
             // 자바스크립트 특성상 요소 하나하나에 스타일 혹은 값을 대입해야 함
-            // for (let i = 0; i < js_h4s.length; i++) {
-            //     js_h4s[i].style.display = "block";
-            // }
-            $('#js h4').css('display', 'block');
+            for (let i = 0; i < js_h4s.length; i++) {
+                js_h4s[i].style.display = "block";
+            }
+            // $('#js h4').css('display', 'block');
             
             // 현재 '보이기버튼'은 다시 숨김처리 하기
             v_btn.style.display = "none";
             v_cnt = 0;
+        });
+
+        // jQuery방식으로 요소 숨기기/보이기
+        $('#jq>h4').on('click', function() {
+            $(this).hide();
+
+            // 모든 h4요소가 숨겨졌을 때 숨어있던 버튼 보이기 처리
+            console.log($('#jq>h4:visible').length);
+
+            if ($('#jq>h4:visible').length < 1) {
+                $('#jq button').show();
+            }
+        });
+
+        // 보이기버튼 이벤트
+        $('#jq button').click(function() {
+            $('#jq>h4').show(); // 사라졌던 요소 보이기
+            // 현재 보이기 버튼 숨기기
+            $(this).hide();
         });
 
     // });
