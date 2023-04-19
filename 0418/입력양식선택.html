@@ -6,7 +6,10 @@
 <style>
 /* input[type='radio'],
 input[type='checkbox'] {
-  appearance: none; /* 기본 적용된 스타일 제거 
+  appearance: none; /* 기본
+  
+ 
+  적용된 스타일 제거 
   width: 1em;
   height: 1em;
 } */
@@ -26,29 +29,29 @@ input[type='checkbox']:checked {
 $(function(){
 	
 	// input요소
-	$(':input').css('border','solid navy');
+	// $(':input').css('border','solid navy');
 	
 	// input type=button인 요소
-	$('input:button').css('backgroundColor','yellow');
+	// $('input:button').css('backgroundColor','yellow');
 	
 	// type속성이 text, password인 요소
-	$(':text, :password').css('background-color','salmon');
+	// $(':text, :password').css('background-color','salmon');
 	
 	// type속성이 radio, checkbox인 요소 - appearance: none으로 모든 스타일 제거 후 적용가능
-	$(':radio, :checkbox').css('background-color','gold')
-						.css('border','double green');
+	// $(':radio, :checkbox').css('background-color','gold')
+						// .css('border','double green');
 
 	// type속성이 submit인 요소
-	$(':submit').css('backgroundColor','yellowgreen');
+	// $(':submit').css('backgroundColor','yellowgreen');
 
 	// type속성이 reset인 요소
-	$(':reset').css('background-color','orange');
+	// $(':reset').css('background-color','orange');
 
 	// type속성이 file, image인 요소
-	$(':file, :image').css('border','outset white');
+	// $(':file, :image').css('border','outset white');
 	
 	// Button요소와 input type이 button인 요소
-	$(':button').css('border','dashed red');
+	// $(':button').css('border','dashed red');
 });
 </script>
 </head>

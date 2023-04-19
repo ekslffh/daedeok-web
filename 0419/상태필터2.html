@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(function() {
+
+    $('input:button').on('click', function() {
+
+        let hobby = "";
+        // 입력양식선택자:상태필터
+        $(':checkbox:checked').each(function(i, v) {
+            // console.log(this, v);
+            // value => val()
+            if (i > 0) hobby += ",";
+            hobby += $(this).val(); // javascript value속성 대체
+        });
+
+        // if (hobby == "") return;
+        if (hobby == "") hobby += "없구나...";
+        alert("너의 취미는 " + hobby);
+    });
+
+    // 버튼으로 값 출력하기
+    $(':button').eq(1).on('click', function() {
+        console.log($('select').val());
+    });
+
+    // 드롭박스자체로 값 출력하기
+    $("#sel1").on('change', function() {
+        $('#disp').text($(this).val());
+    });
+
+   $('button:button').eq(1).click(function() {
+        
+    // let opt = "";
+    let arr = [];
+        $('#sel2 option:selected').each(function() {
+            // console.log($(this).val());
+            // opt += $(this).val();
+            arr.push($(this).val());
+        });
+        $('body').append("<br>" + arr);
+   });
+});
+</script>
+<body>
+    <h4>:checked :selected</h4>
+
+    <span>취미: </span>
+    <input type="checkbox" value="여행" checked>여행
+    <input type="checkbox" value="블로그">블로그
+    <input type="checkbox" value="베이킹" checked>베이킹
+    <input type="checkbox" value="슬라임">슬라임
+    <input type="checkbox" value="골프">골프
+    <input type="button" value="선택">
+
+    <br><br>
+
+    <span>봄소식: </span>
+    <select id="sel1">
+        <option>선택</option>
+        <option>개나리</option>
+        <option>진달래</option>
+        <option>민들레</option>
+        <option>목련</option>
+        <option>왕벚꽃</option>
+    </select>
+    <span id="disp"></span>
+    <button>선택</button>
+
+    <br><br>
+
+    <span>봄소식: </span>
+    <select id="sel2" multiple size="5">
+        <option>개나리</option>
+        <option>진달래</option>
+        <option>민들레</option>
+        <option>목련</option>
+        <option>왕벚꽃</option>
+    </select>
+    <button>선택</button>
+</body>
+</html>

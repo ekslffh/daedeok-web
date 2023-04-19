@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<script>
+$(function() {
+
+    // 선택자:필터
+    // (first, last, eq, lt, gt)필터 대신 메소드로 대체
+
+    // $('li:first, li:last').css('backgroundColor', 'green');
+    $('li').first().css('backgroundColor', 'green');
+    $('li').last().css('backgroundColor', 'green');
+
+    // 메소드체이닝으로 여러 속성 정의
+    // $('li:eq(2)').css('background', 'purple').css('color', 'gold');
+    // 객체표현방식으로 여러 속성 정의
+    // $('li:eq(2)').css({'background':'purple', 'color':'blue'});
+    $('li').eq(2).css({'background':'purple', 'color':'blue'});
+
+    // 지정한 index는 범위에 포함하지 않음
+    // slice(str, end범위 미포함)
+    $('li:lt(4)').css('fontSize', '2em');
+    $('li').slice(0, 4).css('font-style', 'italic');
+    $('li:gt(4)').css('textAlign', 'right');
+    $('li').slice(5).css('backgroundColor', 'gray');
+
+    // even - 짝수(0포함) // odd - 홀수
+    $('li:even').css('border-style', 'double');
+    $('li:odd').css('border-style', 'dotted');
+
+    $('li:not(.not)').css('textDecoration', 'line-through');
+
+});
+</script>
+<body>
+    <h4>기본 필터</h4>
+    <ul>
+        <li>:first</li>
+        <li>:last</li>
+        <li>:eq(index)</li>
+        <li>:gt(index)</li>
+        <li>:lt(index)</li>
+        <li class="not">:even</li>
+        <li class="not">:odd</li>
+        <li class="not">:not(selector)</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+td {
+    padding: 10px;
+}
+</style>
+</head>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(function() {
+    // 서로 다른 부모에 속한 요소의 첫번재/마지막 항목
+    $('li:first-child').css('color', 'lime');
+    $('li:last-child').css('color', 'hotpink');
+    // 전체 대상요소('li') 중에서 첫번째 항목
+    $('li').first().css('border', '1px dotted red');
+    $('li').last().css('border', '1px dotted red');
+
+    $('td:last-child').css('backgroundColor', 'skyblue');
+    // nth-child(index)
+    $('td:nth-child(4)').css('backgroundColor', 'royalblue');
+    // nth-child(even/odd)
+    $('td:nth-child(odd)').css('backgroundColor', 'pink');
+    $('td:nth-child(even)').css('backgroundColor', 'hotpink');
+    // nth-child(equation, 배수 지정(3n+2, 인덱스2번부터 3칸마다))
+    $('td:nth-child(3n+3)').css('backgroundColor', 'green');
+
+    // 행을 대상으로 배경색 지정했을 때 이미 셀(td)에 배경색이 모두 설정되어 있으면
+    // 행(tr)에 설정한 배경색은 셀(td)에 가려 보이지 않음
+    // => 레이어 구조상 tr위에 td가 올려져있어서...
+    $('tr:first-child td').css('backgroundColor', 'gold'); // 행 첫줄
+    $('tr:last-child td').css('backgroundColor', 'gray'); // 행 막줄
+    $('tr:nth-child(3) td').css('backgroundColor', 'blue'); // 3번줄
+    // $('tr:nth-child(3) td').css('backgroundColor', 'orange'); // 짝수줄
+
+    // 유일한 자식요소일 때
+    $('table:only-child').css('border', '5px dashed orange');
+});
+</script>
+<body>
+    <h4>자식 필터</h4>
+
+    <ul>
+        <li>first-child1</li>
+        <li>last-child1</li>
+        <li>nth-child1</li>
+        <li>only-child1</li>
+    </ul>
+    
+    <ul>
+        <li>first-child2</li>
+        <li>last-child2</li>
+        <li>nth-child2</li>
+        <li>only-child2</li>
+    </ul>
+
+    <div>
+        <table border="1">
+            <tr>
+                <td></td><td></td><td></td>
+                <td></td><td></td><td></td>
+                <td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td></td><td></td><td></td>
+                <td></td><td></td><td></td>
+                <td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td></td><td></td><td></td>
+                <td></td><td></td><td></td>
+                <td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td></td><td></td><td></td>
+                <td></td><td></td><td></td>
+                <td></td><td></td><td></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

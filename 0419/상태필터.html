@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+:enabled {
+    border: 1px ridge green;
+}
+:disabled {
+    border: 1px ridge orange;
+}
+</style>
+</head>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(function() {
+    // 스타일 적용 시점이 더 앞서 있기 때문에 요소의 상태가 변해도 스타일이 반영되지 못함
+    // $(':enabled').css('border', '1px ridge blue');
+    // $(':disabled').css('border', '1px ridge red');
+
+    // 속성 변경 disabled -> enabled 처리
+    // let inputs = document.querySelectorAll('input');
+    // console.log(inputs[2]);
+    // inputs[2].setAttribute('disabled', false); // 적용안됌
+    // inputs[2].setAttribute('enabled', true); // 적용안됌
+    // inputs[2].setAttribute('enabled', enabled); // 적용안됌
+    // inputs[2].removeAttribute('disabled'); // 정의된 속성을 제거
+
+    // let formAll = document.querySelectorAll('form *')
+    // for (let i = 0; i < formAll.length; i++) {
+    //     // form하위 모든 요소 활성화시키기 코드 작성하세요
+    //     formAll[i].removeAttribute('disabled'); // form하위 요소들의 속성 제거
+    // }
+
+    // jq방식
+    $('form *').attr('enabled', true); // 적용안됌
+    // 기존 셋팅되어있던 속성(property)에 boolean값을 적용해서 해제시키는 방식으로..
+    $('form *').attr('disabled', false);
+
+});
+</script>
+<body>
+    <h4>상태 필터 :enabled :disabled</h4>
+
+    <form>
+        <input id="txt" disabled> <br>
+        <input type="password" id="pw" disabled> <br>
+        <select id="sel" disabled>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select> <br>
+        <textarea id="mtline" disabled>multiline</textarea> <br>
+        <input type="button" value="확인" onclick="alert()" disabled>
+    </form>
+</body>
+</html>
