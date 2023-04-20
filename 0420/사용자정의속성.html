@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script src="../js/jquery-3.6.4.min.js"></script>
+<body>
+    <h4>사용자 정의 속성(User Defining Attributes)</h4>
+    <div id="d1" myAlias="유지" data-alias="별명" data-hobby="취미" data-message-code="jmt"></div>
+
+    <input type="text" value="컨텐츠내용" readonly>
+
+</body>
+<script>
+    // javascript방식으로 접근 - dataset키워드로 출발하고 접두어(data-)제거된 속성명으로 접근
+    let v_div = document.querySelector('div');
+    // alert(v_div.id);
+    // alert(v_div.myAlias); // 안됨
+    // alert(v_div.getAttribute('myAlias')); // 메소드를 이용하면 가능
+    // alert(v_div.dataset.alias);
+    // alert(v_div.dataset.hobby);
+    // 하이픈(-)으로 이어진 데이터를 인식못하므로 카멜표기법작성필요
+    // 사용자 정의 속성 지정시 대문자로 표기할 수 없음 - 규칙
+    // alert(v_div.dataset.messageCode); 
+
+    // jquery방식으로 접근 - attr(full attribute), data(data를 제외한 나머지)
+    // alert($('div').attr('data-alias'));
+    alert($('div').data('message-code')); // 카멜케이스 가능
+    alert($('div').data('messageCode')); // 케밥케이스 가능
+
+</script>
+</html>

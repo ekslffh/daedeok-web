@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+img {
+    width: 50px;
+    height: 50px;
+}
+</style>
+</head>
+<script src="../js/jquery-3.6.4.min.js"></script>
+<body>
+    <h4>요소의 속성정보 얻기/설정하기 - 파일명을 추출 후 title속성으로 설정하기 예제</h4>
+
+    <img src="../images/bara1.jpg" alt="">
+    <img src="../images/bara2.jpg" alt="">
+    <img src="../images/som1.jpg" alt="">
+    <img src="../images/wok1.jfif" alt="">
+    <img src="../images/bara6.webp" alt="">
+</body>
+<script>
+    // attribute get - 첫번째 항목만 반환
+    // console.log($('img').attr('src'));
+    // attribute set - 모든 항목에 일괄 적용
+    $('img').attr('title','동일title적용');
+
+    // attribute set2 - 각 항목에 순차적인 값을 적용하기
+    // 망!!!!!
+    // $('img').attr('src', function(i, v) {
+    //     // console.log(this.src);
+    //     console.log(v);
+    //     // 파일명을 추출하기
+    //     let str = v.lastIndexOf("/") + 1;
+    //     let end = v.lastIndexOf(".");
+    //     let v_src = v.slice(str, end);
+    //     console.log(v_src);
+    //     // this.title = v_src;
+    // });
+
+    $('img').attr('title', function() {
+        // this로 순차적인 요소를 반환받을 수 있고
+
+        // img요소 갯수만큼 반복하여 src속성 값 얻음
+        // console.log($(this).attr('src'));
+        // img요소 갯수만큼 반복하여 src속성의 첫번째 값만 얻음
+        // console.log($('img').attr('src')); // 원하는 데이터 추출 불가능
+
+        let v_src = $(this).attr('src');
+        // 파일명을 추출하기
+        let str = v_src.lastIndexOf("/") + 1;
+        let end = v_src.lastIndexOf(".");
+        let fileNm = v_src.slice(str, end);
+        console.log(fileNm);
+        return fileNm;
+    });
+
+    // 속성 제거 메소드 - removeAttr()
+    $('img').eq(3).removeAttr('src'); // index3항목의 src르르 제거하여 이미지표현안됌
+
+    // 속성 추가 - 객체형태('{}')로 여러가지 속성추가해보기
+    $('img').eq(3).attr({'src':'../images/bara4.jfif',
+                            'alt':'배라4번', 'title':'ㅊㅊㅎㅊㅋㅊ'}); 
+
+
+
+</script>
+</html>
