@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+img {
+    width: 40px;
+}
+p {
+    border: 2px ridge orange;
+    display: inline-block;
+}
+</style>
+</head>
+<body>
+    <h4>요소 정보로 이미지를 생성 후 위치로 추가하기</h4>
+<!--    before(), insertBefore() - 대상요소 바깥쪽 앞에 추가
+        append(), appendTo() - 대상요소 안쪽 앞에 추가
+        prepend(), prependTo() - 대상요소 안쪽 뒤에 추가
+        after(), insertAfter() - 대상요소 바깥쪽 뒤에 추가  -->
+    
+    <p title="ala.jpg">알라</p> <br>
+    <p title="lion.jpg">양이</p> <br>
+    <p title="bara4.jfif">배라4</p> <br>
+    <p title="bara6.webp">배라6</p> <br>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    // p요소의 title속성값 => src경로로 활용, content정보 => alt로 설정 >> 이미지 동적 생성 예정
+    $('p').on('click', function() {
+        let titleToSrc = $(this).attr('title');
+        let textToAlt = $(this).text();
+
+        // JS방식으로 동적 이미지 생성하기1 (문자열로 요소 생성)
+        let v_js1 = "<img src='../images/" + titleToSrc + "' alt='" + textToAlt + "'>";
+
+        // JS방식으로 생성2 (NODE)
+        let v_js2 = document.createElement("img");
+        v_js2.src = '../images/' + titleToSrc;
+        v_js2.alt = textToAlt;
+        // this.appendChild(v_js2);
+        
+        // this.innerHTML += v_js1; // 보안문제로 권장하지 않는 속성 innerHTML -> insertAdjaceHTML()로 대체
+        // beforebegin, afterbegin, beforeend, afterend
+        this.insertAdjacentHTML('afterbegin', v_js1); // 요소 안쪽 앞에 추가되도록..
+        this.appendChild(v_js2); // 요소 안쪽 뒤에 추가..
+
+        // jquery방식으로 동적 이미지 생성하기1 (문자열을 이용한 jquery객체형태)
+        $(`<img src=../images/${titleToSrc} alt='${textToAlt}''> title='jq방식1'`).insertBefore(this);
+
+        // jq방식 이미지생성2 (문자열을 이용한 jquery객체형태)
+        // let v_jq2 = $('<img>', {
+        //     'src' : '../images/' + titleToSrc,
+        //     'alt' : textToAlt,
+        //     'title' : 'jq방식2'
+        // });
+
+        // $(this).append(v_jq2);
+        $(this).after($('<img>', 
+        {
+            'src' : '../images/' + titleToSrc,
+            'alt' : textToAlt,
+            'title' : 'jq방식2'
+        }));
+    });
+
+</script>
+</body>
+</html>

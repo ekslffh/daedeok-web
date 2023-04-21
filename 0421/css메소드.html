@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+img {
+    width: 100px;
+    height: 100px;
+}
+div {
+    padding: 20px;
+    margin: 10px;
+}
+.pColor {
+    color: lime;
+}
+.pBgYellow {
+    background-color: yellow;
+}
+.pBgTeal {
+    background-color: teal;
+}
+.border {
+    border: 3px dotted purple;
+}
+</style>
+</head>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(function() {
+
+    $('#btn').on('click', function() {
+        // $('p').css('color', 'red'); // 우선순위는 이게 더 높지만
+        $('p').addClass('pColor'); // 방식 더 선호, 유지보수가 더 편함
+    });
+
+    $('p').on('click', function() {
+    //     if ($(this).hasClass('pBgYellow')) {
+    //         // removeClass
+    //         $(this).removeClass('pBgYellow'); 
+    //     } else {
+    //         // addClass
+    //         $(this).addClass('pBgYellow'); // 선택된 각 p요소에 스타일 부여
+    //     }
+
+        $(this).toggleClass('pBgTeal');
+    });
+
+    // $('div').on('mouseover', function() {
+    //     $(this).addClass('pBgTeal');
+    // });
+    // $('div').on('mouseout', function() {
+    // });
+
+    // $('div').hover(function(){
+    //     $(this).addClass('pBgYellow');
+    // }, function(){
+    //     $(this).removeClass('pBgYellow');
+    // })
+
+    // on()메소드로 hover이벤트 적용불가
+    // 대신 mouseover - mouseout / mouseenter - mouseleave사용
+    $('div').on({mouseenter:function() {
+        $(this).addClass('pBgTeal');
+    }, mouseleave:function() {
+        $(this).removeClass('pBgTeal');
+    }});
+
+    $('img').on('dblclick', function() {
+        // 요소에 적용하는 이벤트를 토글
+        $(this).toggleClass('border');
+    });
+});
+</script>
+<body>
+    <input type="button" id="btn" value="확인">
+
+    <p>click!!</p>
+    <p>click!!</p>
+    <p>click!!</p>
+    <p>click!!</p>
+    <p>click!!</p>
+
+    <div></div>
+
+    <img src="../images/ala.jpg" alt="ala">
+    <img src="../images/lion.jpg" alt="lion">
+    <img src="../images/너굴맨.jpg" alt="너굴맨">
+    <img src="../images/호빵맨.jpg" alt="호빵맨">
+    <img src="../images/bara1.jpg" alt="bara1">
+
+</body>
+</html>

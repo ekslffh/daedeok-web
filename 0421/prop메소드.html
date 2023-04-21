@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script src="../js/jquery-3.6.4.min.js"></script>
+<script>
+$(function() {
+
+    let $chk, $rdo, $sel, $txt; // 전역으로 선언만
+
+    // 입력양식요소들의 상태 값 출력
+    $('#runBtn').on('click', function() {
+        $chk = $('#chk').prop('checked');
+        $rdo = $('#rdo').prop('checked');
+        $sel = $('#sel option').eq(2).prop('selected');
+        $txt = $('#txt').prop('readonly');
+
+        // console.log(chk);
+        let result = "체크박스: " + $chk + "<br>";
+        result += `라디오버튼: ${$rdo} <br>`;
+        result += `콤보박스: ${$sel} <br>`;
+        result += `읽기전용: ${$txt} <br>`;
+
+        $('#disp').html(result);
+    });
+
+    $('#chgBtn').click(function() {
+                                    // 여기서 재사용 - !연산자를 이용해 값을 거꾸로 변경
+        $('#chk').prop('checked', !$chk);
+        $('#rdo').prop('checked', !$rdo);
+        $('#sel option').eq(2).prop('selected', !$sel);
+        $('#txt').prop('readonly', !$txt);
+    });
+});
+</script>
+<body>
+    <h4>요소의 상태 제어 및 상태 값을 boolean으로 반환받음</h4>
+    <form action="">
+        <input type="checkbox" id="chk" checked>
+        <input type="radio" id="rdo">
+        <select id="sel">
+            <option value="1">일</option>
+            <option value="2">이</option>
+            <option value="3">삼</option>
+            <option value="4">사</option>
+        </select>
+        <input id="txt" value="가나다" readonly> <br><br>
+
+        <input type="button" id="runBtn" value="현재 상태 값 출력">
+        <input type="button" id="chgBtn" value="반대 상태로 변경">
+    </form>
+
+    <div id="disp"></div>
+
+    <hr>
+
+    <div>
+        <input type="checkbox" id="chkAll"> 전체선택
+        <input type="checkbox" class="chk">1
+        <input type="checkbox" class="chk">2
+        <input type="checkbox" class="chk">3
+        <input type="checkbox" class="chk">4
+        <input type="checkbox" class="chk">5
+    </div>
+
+<script>
+// 전체선택으로 제어하기
+$('#chkAll').on('click', function() {
+    let allChk = $(this).prop('checked'); // 전체선택 체크박스의 상태 값 가져오기
+    console.log(allChk);
+    // 하위요소 선택1 하고 전체선택의 상태 값 대입하기
+    // $('.chk').prop('checked', allChk);
+    // 하위요소 선택2
+    // $(this).nextAll().prop('checked', allChk);
+    // 하위요소 선택3 - 상위요소 찾기 메소드 >> parent() / 하위요소 찾기 메소드 >> find()
+    $(this).parent().find('.chk').prop('checked', allChk);
+});
+
+// 하위요소로 제어하기 (=하위요소가 모두 선택되면 전체선택 체크되도록)
+$('.chk').on('click', function() {
+    
+    let $chk = $('.chk').length; // 하위요소 갯수
+    let $choose = $('.chk:checked').length; // 실제 체크된 하위요소의 갯수 -- 상태필터 >> :checked
+    
+    console.log($chk, $choose);
+    if ($chk > $choose) {
+        $('#chkAll').prop('checked', false);
+    } else {
+        $('#chkAll').prop('checked', true);
+    }
+});
+
+</script>
+</body>
+</html>

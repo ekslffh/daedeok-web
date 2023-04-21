@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- clone() / clone(true) 요소 복사시 이벤트처리기(핸들러)도 함께 복사 -->
+    <p id="p1">인수로 true설정시 이벤트핸들러 복사</p>
+    <input type="button" value="clone()"> <!-- dafault -->
+    <input type="button" value="clone(true)"> 
+    <div id="disp"></div>
+
+    <!-- id속성이 중복될 경우 가장 상단에 위치한 요소만을 대상으로 셀렉트함 -->
+    <span id="s1">1</span>
+    <span id="s1">2</span>
+    <span id="s1">3</span>
+    <span id="s1">4</span>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    console.log($('#s1').text()); // text()는 모든 요소 대상으로 값을 가져오지만
+                                  // id는 유일한 값을 가져야 함으로 내부적으로 최상단 요소만 선택
+
+    $('#p1').on('click', function() {
+        // $('#p1').css('fons-size', '+=1px');
+        $(this).css('fontSize', '+=1px');
+    })
+
+    // 얕은 복사 - clone() 대상요소를 복사
+    $('input').eq(0).on('click', function() {
+        let copy = $('#p1').clone(); // 복사
+        $('#disp').append(copy);   // 붙여넣기 append, prepend, after, before
+    });
+
+    // 깊은 복사 - clone(true) 대상요소를 복사시 요소가 가진 이벤트까지 복사
+    $('input').eq(1).on('click', function() {
+        let copyDeep = $('#p1').clone(true); 
+        // copyDeep.appendTo($('#disp'));  // 붙여넣기 append, prepend, after, before
+        copyDeep.appendTo('#disp');  // 둘다 가능
+    });
+
+</script>
+</body>
+</html>
