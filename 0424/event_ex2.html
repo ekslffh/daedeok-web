@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    img {
+        width: 100px;
+        height: 100px;
+        border-radius: 20%;
+    }
+    [value="show"] {
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <img src="../images/som1.jpg" data-src="../images/wok1.jfif">
+    <img src="../images/som2.jpg" data-src="../images/스폰지밥.png">
+    <img src="../images/som3.jpg" data-src="../images/lion.jpg">
+    <img src="../images/ala.jpg" data-src="../images/너굴맨.jpg">
+    <br> <input type="button" value="show">
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    let v_src;
+    let v_src2;
+    $('img').on({
+        // 이미지 위로 마우스가 올라왔을 때 data-src이미지 보여주기
+        mouseenter : function() {
+            v_src = $(this).attr('src');
+            v_src2 = $(this).data('src');
+
+            // console.log(v_src, v_src2);
+            $(this).attr('src', v_src2);
+        },
+        // 마우스가 이미지요소 밖으로 빠져나왔을 때 원래 소스(src)로 복귀
+        mouseleave : function() {
+            $(this).attr('src', v_src);
+        },
+        dblclick : function() {
+            // 더블클릭하면 이미지 요소 사라지게 만들기 - hide()
+            $(this).hide();
+
+            // 이미지 요소 모두 사라졌을 때 버튼 보이기 - show()
+            // 조건은 :visible 필터로 한다
+            if ($('img:visible').length < 1) {
+                $('input').show();
+            }
+        }
+    });
+
+    // 버튼 클릭이벤트 부여 후 사라졌던 이미지요소 다시 보이기 - show()
+    // 현재 버튼 숨기기 - hide()
+    $(':button').click(function() {
+        $('img').show();
+
+        // 현재 버튼 숨기기 - hide()
+        $(this).hide();
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+div {
+    width: 80%;
+    height: 80vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+span {
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+</style>
+</head>
+<body>
+    <div>
+        <span>a</span>
+    </div>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+// 이벤트 핸들러/리스너를 통해 event객체를 매개변수로 전달받음(보통 'e'로 사용)
+// 이벤트 객체는 이벤트 정보를 저장한 property와 이벤트 흐름을 제어하는 method를 갖음
+$('div').on('mousedown', function(e) {
+    $(this).text(""); // 영역 초기화
+
+    // 발생한 이벤트에 대한 정보를 event키워드로 받음 => microsoft에서 사용하던 방식, 비표준
+    // 아직도 많이 사용되고 있긴 하지만 표준방식이 아니므로 권장하지 않음
+    console.log(event); 
+
+    let result = "타입: " + event.type + "<br>";
+    result += `타켓: ${e.target} <br>`;
+    result += `타켓 요소명: ${e.target.nodeName} <br>`;
+    result += `element대상 x축: ${e.pageX} <br>`;
+    result += `element대상 y축: ${event.pageY} <br>`;
+    result += `window대상 x축: ${e.screenX} <br>`;
+    result += `window대상 y축: ${event.screenY} <br>`;
+    // mousedown이벤트로 접근해야 button, which속성값을 얻을 수 있음
+    result += `button 속성: ${e.button} <br>`;
+    result += `which 속성: ${event.which}`;
+
+    // append로 요소안쪽에 내용을 추가하고 있기 때문에 영역의 초기화 필요
+    $(this).append(result); // result의 정보를 div공간에 출력
+
+    // 하나의 요소에 여러 이벤트 적용하기
+});
+
+$('div').on({
+        mouseover: function(){ // mouseenter
+            $(this).css('backgroundColor', 'salmon');
+        },
+        mouseleave: function(){
+            $(this).css('backgroundColor', 'purple');
+        },
+        dblclick: function(){
+            $(this).css('backgroundColor', 'lime');
+        }})
+</script>
+</body>
+</html>

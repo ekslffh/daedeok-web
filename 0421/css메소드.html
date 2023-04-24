@@ -23,6 +23,7 @@ div {
 }
 .border {
     border: 3px dotted purple;
+    padding: 5px;
 }
 </style>
 </head>
@@ -70,7 +71,15 @@ $(function() {
     $('img').on('dblclick', function() {
         // 요소에 적용하는 이벤트를 토글
         $(this).toggleClass('border');
+
+        print($(this).width(), "padding, border, margin을 포함하지 않은 너비 값");
+        print($(this).innerWidth(), "padding을 포함하는 너비 값");
+        print($(this).outerWidth(), "padding, border를 포함하는 너비 값");
     });
+
+    function print(p_arg1, p_arg2) {
+        console.log(p_arg1, p_arg2);
+    }
 });
 </script>
 <body>

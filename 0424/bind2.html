@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<body>
+    <div>
+        <input type="file">
+        <button id="add">파일선택 영역 추가</button>
+        <!-- id=add버튼을 눌러 동적인 요소가 추가되는 위치 -->
+        <!-- <p>
+                <input type='file'>
+                <button class='del'>삭제</button>
+            </p>
+         -->
+    </div>
+</body>
+<script>
+    $('#add').on('click', function() {
+        let v_file = "<p>";
+        v_file += "<input type='file'>";
+        v_file += "<button class='del'>삭제</button>";
+        v_file += "</P>";
+
+        $('div').append(v_file);
+        
+
+        // v_file = $('<input>', {
+        //     'type' : 'file'
+        // });
+
+        // $('div').append(v_file);
+    });
+
+    // 삭제버튼(동적요소)에 이벤트 부여하기 - delegate방식으로
+    // $(부모).on('event', '실제 이벤트를 적용할 대상 - 자식요소', fnc)
+    // 부모는 정적인 요소이어야 하지만 찾기 힘들때 최상위 요소 document를 대상으로 함 
+    $('div').on('click', '.del', function() {
+        // 부모를 선택자로 했을 때 자식요소까지 모두 지워주는 remove()사용
+        // 상위요소 검색 메소드 - parent()
+        console.log(this);
+        $(this).parent().remove();
+    });
+</script>
+</html>

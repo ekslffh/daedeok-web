@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<!--    delegate(위임, 대리)
+        부모의 이벤트를 물려받아 지정된 선택자에 이벤트를 연결하는 방식
+        정적/동적요소가 같은 이벤트 처리기(핸들러)를 사용
+        부모요소는 '반드시 정적요소'이어야 하며 부모 대신 document지정 가능 
+-->
+    <div>
+        <input type="button" class="btn" value="버튼">
+        <input type="button" id="clear" value="해제">
+    </div>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    // $('parentSelector').on('event', 'childSelector', function(){}) - delegate방식
+    $('div').on('click', '.btn', function() {
+        $('div').append($('<input>', {
+            'type' : 'button', 
+            'class' : 'btn',
+            'value' : '뉴버튼'
+        })); // 부모.append(자식)
+    });
+
+    // 해제버튼으로 이벤트 해제하기
+    $('#clear').click(function() {
+        // 해제기능 넣기
+        $('div').off('click');
+    });
+
+</script>
+</body>
+</html>

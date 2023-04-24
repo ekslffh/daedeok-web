@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<!--    bind 
+        실행(로딩)전 document에 생성되어 있는 (정적)요소에만 이벤트 핸들러가 동작
+-->
+    <div>
+        <input type="button" class="btn" value="버튼">
+        <input type="button" id="clear" value="해제">
+    </div>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    // $('selector').on('event', function(){}) - bind방식
+    $('.btn').on('click', function() {
+
+        // 클릭이벤트 적용대상과 동일한 형태의 버튼을 동적으로 생성
+        $('<input>', {
+            'type' : 'button',
+            'class' : 'btn',
+            'value' : '새버튼'
+        }).appendTo('div'); // 요소 내부 뒤편에 요소 추가하기
+
+    });
+
+    $('#clear').on('click', function() {
+        $('.btn').off();
+    })
+</script>
+</body>
+</html>

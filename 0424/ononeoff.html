@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    .bgRed {
+        background-color: red;
+    }
+</style>
+</head>
+<body>
+    <p>on(event,fn) / one(event,fn) / off(event)</p>
+    <button>이벤트 제거</button>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    /*
+        이벤트 속성 중 options..
+        - data 
+        {Key:Value}의 형태로 작성하고 
+        event객체의 'data'속성으로 key에 접근하여 값을 얻음
+
+        - map
+        {event:fnc, event:fnc, ...} 여러 이벤트를 등록하는 형태를 map이라 부름
+
+    */
+
+    $('p').on('mouseover', {param : "는 이벤트객체로만 전달", once : "1번"}, function(e) {
+        $('p').toggleClass('bgRed');
+
+        // event키워드로는 data속성 값에 접근할 수 없다
+        // 매개변수('e'또는 'ev' 많이 사용)를 통한 event객체로만 data속성 값에 접근 가능!
+        console.log("넘어오는 데이터 정보 확인>> ", e.data.param);
+    })
+
+    $('button').on('click', function() {
+        $('p').off('mouseover');
+    });
+
+    $('p').one('click', {param : "는 이벤트객체로만 전달", once : "1번"}, function(ev) {
+        alert("한번(" + ev.data.once + ")만 실행되는 이벤트 메소드");
+    });
+</script>
+</body>
+</html>

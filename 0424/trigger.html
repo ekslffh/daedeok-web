@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <select id="sido">
+        <option value="">선택하세요</option>
+        <option value="1">대전광역시</option>
+        <option value="2">서울특별시</option>
+        <option value="3">제주시</option>
+    </select>
+    <select id="gugun"></select>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    $('#sido').on('change', function() {
+
+        $('#gugun').text(""); // 영역초기화
+        let v_opt = "<option>대덕구</option>";
+        v_opt += "<option>동구</option>";
+        v_opt += "<option>서구</option>";
+        v_opt += "<option>유성구</option>";
+        v_opt += "<option>중구</option>";
+
+        $('#gugun').append(v_opt); // 영역초기화 필요
+    });
+
+    // trigger - 대상요소에 적용되어 있는 이벤트를 강제적으로 실행시키는 기능
+    $('#sido option').eq(1).prop('selected', true);
+    $('#sido').trigger('change');
+
+</script>
+</body>
+</html>
