@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#d1 {
+    border-style: solid;
+    height: 300px;
+}
+img {
+    position: relative;
+}
+</style>
+</head>
+<body>
+    <div id="d1">
+        <img src="../images/루피.png" alt="루피">
+    </div>
+    <input type="button" id="toLeft" value="<<<">
+    <input type="button" id="toRight" value=">>>">
+
+    <input type="button" id="btn3" value="css와 animate로 텍스트크기변화주기">
+    <p id="p1">고영희 야옹 - css</p>
+    <p id="p2">고영희 야옹 - animate</p>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    $('#btn3').on('click', function() {
+        $('#p1').css('fontSize', '+=1px');
+        $('#p2').animate({'fontSize':'+=1px'}, 200);
+    });
+
+    // effect
+    // $('#d1').on('click', function() {
+    //     $('img').fadeToggle(1000);
+    //     alert("숨겼어..");
+    // });
+
+    $('#d1').on('click', function() {
+        $('img').fadeToggle(1000, function() {
+            alert("숨겼어..");
+        });
+    });
+
+    // animate
+    $('#toLeft').on('click', function() {
+        $('img').animate({left : '-=10px'}, 100);
+    });
+    // 요소를 안쪽으로 이동할 때 양수(+)값, 바깥쪽으로 이동할때 음수(-)값 적용
+    $('#toRight').on('click', function() {
+        $('img').animate({left : '+=10px'}, 100);
+    });
+
+</script>
+</body>
+</html>

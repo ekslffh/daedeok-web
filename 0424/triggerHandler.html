@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+:focus {
+    background-color: gold;
+}
+</style>
+</head>
+<body>
+    <button>trigger</button>
+    <button>triggerHandler</button> <br>
+    <input><br>
+    <input><br>
+    <input><br>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    // $('input').on('focus', function(){});
+    // 'focus'이벤트
+    $('input').focus(function() {
+        $(this).val("ㅎㅎㅎ나 선택?");
+    });
+
+    // trigger() - 이벤트 기본동작 수행 / DOM구조에 따라 이벤트 확산됨(버블링)
+    $(':button').eq(0).click(function(){
+        $('input').eq(1).trigger('focus');
+    });
+
+    // triggerHandler() - 이벤트 기본동작 수행안함(함수만 실행) / 첫번째 요소만 대상
+    //                    DOM구조에 따라 이벤트 확산안됌
+    $('button').eq(1).on('click', function() {
+        // $('input').eq(1).triggerHandler('focus');
+        $('input').triggerHandler('focus');
+    })
+
+</script>
+</body>
+</html>

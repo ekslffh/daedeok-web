@@ -12,6 +12,7 @@
         <option value="3">제주시</option>
     </select>
     <select id="gugun"></select>
+    <p>클릭</p>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
@@ -30,6 +31,15 @@
     // trigger - 대상요소에 적용되어 있는 이벤트를 강제적으로 실행시키는 기능
     $('#sido option').eq(1).prop('selected', true);
     $('#sido').trigger('change');
+
+    $('p').on('customEvent', function(ev, a, b, c, d, e) {
+        alert(ev.type + "\n" + event.type + "\n" +  a + "\n" + b + "\n" + c + "\n" + d + "\n" + e);
+    });
+
+    // $('p').click(function() {});
+    $('p').on('click', function() {
+        $('p').trigger('customEvent', ['대', '덕', '인', '재']);
+    });
 
 </script>
 </body>

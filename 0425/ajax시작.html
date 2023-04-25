@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 1. 통신을 위한 객체 생성 - XMLHttpRequest
+    let v_ajax = new XMLHttpRequest();
+
+    // 2. 요청정보 설정 - open(method, url, async)
+    v_ajax.open('get', './dummy.txt', true);
+
+    // 4. 이벤트리스너를 통해 요청코드 확인 후 응답 결과 확인
+    // onreadystatechange   readyState   status  statusText
+    v_ajax.onreadystatechange = function(){
+        console.log(v_ajax.readyState);
+        if (v_ajax.readyState == 4 && v_ajax.status == 200) {
+            console.log(v_ajax.responseText); // ??
+        }
+    };
+
+    // 3. 요청 정보 서버로 전달 - send()
+    v_ajax.send();
+
+</script>

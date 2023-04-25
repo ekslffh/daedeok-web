@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<!-- 
+    JSON(JavaScript Object Notation, 자바스크립트 객체 표기법)
+    네트웤을 사용하는 데이터 통신은 데이터를 byte형태로 전달하는데, 
+    서버 - 클라이언트 간 데이터를 주고받을 때 사용하는 자료 형식 중
+    대표적으로 XML과 JSON을 사용한다
+
+    JSON은 XML을 대안으로 좀 더 쉽게 데이터를 교환하기 위해 만들어진
+    텍스트 기반 데이터 교환 표준이다.
+    텍스트 기반이기 때문에 어떤 프로그래밍 언어에서도 데이터를 사용할 수 있다.
+
+    객체 표기법으로 만들어졌기 때문에 '객체에 포함되는 배열'에 근거하여
+    배열로 JSON의 일부로 생각할 수 있다. 
+-->
+
+    <button>JSON 변환 테스트</button>
+    <div></div>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    $('button').on('click', function() {
+        // 자바스크립트 객체 생성
+        let obj = {
+            json : "제이슨",
+            "특징" : "경량의 텍스트기반 데이터 교환 표준이며 xml의 대안",
+            형태 : "JS 리터럴 표현식을 활용한 간단한 문자열 포맷",
+            메소드 : ["stringify()", "parse()"],
+            기능 : {stringify : "JS객체를 JSON화", parse : "JSON을 JS객체화"}
+        };
+
+        // JS객체를 JSON(문자열데이터)으로 변환하기 >> 직렬화, serialize
+        let jsonStr = JSON.stringify(obj);
+        console.log("JSON >> ", jsonStr);
+
+        // JSON문자열을 JS객체로 변환하기 >> 역직렬화, deserialize
+        let jsonObj = JSON.parse(jsonStr);
+        console.log("자바스크립트 객체 >> ", jsonObj);
+
+        let result = "";
+        result += "JSON: " + jsonObj.json + "<br>";
+        result += `특징: ${jsonObj.특징} <br>`;
+        result += `형태: ${jsonObj.형태} <br>`;
+        result += `메소드: ${jsonObj.메소드} <br>`;
+        result += `기능: ${jsonObj.기능.stringify}, ${jsonObj.기능.parse}`;
+
+        $('div').html(result);
+
+    });
+
+</script>
+</body>
+</html>

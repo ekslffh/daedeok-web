@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #d1 *,
+        #d2 * {
+            border: 1px dotted gray;
+            margin: 5px;
+            display: block;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(function () {
+
+            // span요소 기준으로 상위요소 찾기
+            let $span = $('#d1 span');
+
+            // 부모검색 - parent()
+            $span.parent().css('border', '3px solid red');
+
+            // 모든 조상 검색 - parents()
+            $span.parents().css('border', '3px solid orange');
+
+            // // 모든 조상중 대상요소 검색 - parents('element')
+            $span.parents('ul').css('border', '3px solid navy');
+
+            // // 지정 범위 내 조상 검색 - selector.parentUtil(stop) 
+            // // >> selector ~ stop 사이 요소 반환
+            $span.parentsUntil('#d1 div').css('border', '3px solid green');
+
+            // // closet() - 조상 중 가장 가까운 '하나의 결과'를 반환
+            // // 자기 자신을 포함하여 검색
+            $('#middle').closest('li').css('border', '3px solid salmon');
+            // // 대상요소의 직계 부모 라인에서만 검색 (부모의 형제는 대상이 아님)
+            $('#middle').closest('ul').css('border', '3px solid purple');
+
+            // 하위요소 찾기
+            $('#d1').find('span').css('border', '3px solid gold');
+
+            $('#inBtn').parents('li').find('ul').eq(0).children().eq(0).children()
+                .css('backgroundColor', 'gold');
+        })                                                        
+    </script>
+</head>
+
+<body>
+    <div class="box" id="d1">
+        상위/하위요소 검색
+        <div>div
+            <ul>ul
+                <ul>ul
+                    <li>li
+                        <span>span기준으로 상위요소 검색
+                            <ul>ul1
+                                <li>1-1
+                                    <button type="button" id="inBtn">inBtn</button>
+                                </li>
+                                <li>1-2</li>
+                                <li>1-3</li>
+                            </ul>
+                            <ol>ol2
+                                <li>2-1</li>
+                                <li id="middle">2-2(middle)</li>
+                                <li>2-3</li>
+                            </ol>
+                            <ul>ul3
+                                <li>3-1</li>
+                                <li>3-2</li>
+                                <li>3-3</li>
+                            </ul>
+                        </span>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="box" id="d2">
+        형제요소 검색
+        <div>
+            <ul>ul (parent)
+                <li>li prev sibling</li>
+                <li>li prev sibling</li>
+                <li class="start">li "start" (기준)</li>
+                <li>li next sibling</li>
+                <li>li next sibling</li>
+                <li class="stop">li "stop"</li>
+                <li>li next sibling</li>
+            </ul>
+        </div>
+    </div>
+
+<script>
+    // 형제 요소 찾기 메소드
+    // 기준요소 이전/다음 형제 요소 찾기 - prev(), next()
+    $('.start').prev().css('border', '3px solid red');
+
+    // 기준요소의 모든 이전/다음 형제 요소 찾기 - prevAll(), nextAll()
+    $('.start').nextAll().css('border', '3px solid orange');
+
+    // // 시작 ~ 종료 범위 요소 찾기 - start.nextUntil(stop 생략가능)
+    // // 종료 ~ 시작 범위 요소 찾기 - stop.prevUntil(start 생략가능)
+    $('.start').nextUntil('.stop').css('border', '3px solid green');
+
+    // // 기준 위치를 제외한 모든 형제 요소 찾기 - siblings()
+    $('.start').siblings().css('border', '3px solid pink');
+</script>
+</body>
+
+</html>

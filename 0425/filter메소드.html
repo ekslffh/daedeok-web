@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+.bgColor {
+    background-color: gold; 
+    color: green;  
+}
+</style>
+</head>
+<body>
+    <h4>filter(): 선택자, 변수, 함수를 이용해 필터링하는 메소드</h4>
+    <div id="d1">
+        <ul>
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <input type="button" value="filter()">
+    </div>
+
+    <h4>is(): 일치여부를 boolean으로 반환하는 메소드</h4>
+    <div id="d2">
+        <div>
+            <p>부모(div)있는 p</p>
+        </div>
+        <p>부모 없는 p</p>
+        <div>
+            <p>부모(div)있는 p</p>
+        </div>
+        <form id="frm">
+            <p>부모(form)있는 p</p>
+        </form>
+    </div>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    $('#d2 p').on('click', function() {
+        if ($(this).parent().is('#d2 div')) {
+            // 부모있을때 그 요소에 addClass적용
+            $(this).parent().addClass('bgColor');
+        } else {
+            // 부모없을때는 정보 표시
+            alert(`부모는 id=${$(this).parent().attr('id')}인
+                    ${$(this).parent().prop('tagName')}요소~!`);
+        }
+    });
+
+    $(':button').on('click', function() {
+
+        // 선택자 활용
+        // $('li').filter(':even').addClass('bgColor');
+
+        // 변수 활용
+        // let first = $('li').eq(1);
+        // let odd = ":odd";
+        // $('li').filter(odd).addClass('bgColor');
+
+        // 함수 활용
+        $('li').filter(function(i) {
+            return i == 2 || i == 4
+        }).addClass('bgColor');
+
+        $('li').not(function(i) { // 가 아닌 놈
+            return i % 3 == 0 // 3의 배수
+        }).addClass('bgColor');
+
+    })
+</script>
+</body>
+</html>
