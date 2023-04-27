@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    /*
+        동기(synchronous)
+            요청과 응답이 처리될 때까지 대기하고, 응답이 오면 다음 업무를 처리하는 방식
+            (장점) 직관적이고 설계가 쉽다
+            (단점) 결과가 나올때까지 아무것도 못함(=대기)
+
+        비동기(Asynchronous)
+            요청 이후 그 응답이 처리되지 않은 상태에서 다음 업무를 처리하는 방식
+            (장점) 데이터 처리 중 다른 작업 가능하기 때문에, 자원을 효율적으로 사용하고
+                불필요한 로딩을 줄일 수 있다.
+            (단점) 설계가 어렵고 어떤 작업이 먼저 끝날지 알 수 없다.
+    */
+   
+    function f_after(p_arg1, p_arg2) {
+        console.time('실행된 시간'); // 작업시작을 ms로 반환받기 위한 시작 코드
+
+        $('body').append('<img src="../images/ala.jpg">').fadeOut(1000, function() {
+            alert(p_arg1 + "초 만에 " + p_arg2);
+            console.timeEnd('실행된 시간'); // 작업시작을 ms로 반환받기 위한 끝 코드
+        });
+    }
+
+    // setTimeout(fn, delay, [param, ...])
+    setTimeout(f_after, 2000, "2", "도착");
+
+    alert("누가 먼저 실행되나요");
+
+</script>

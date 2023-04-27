@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="AJAX호출">
+    <input type="button" value="CSV">
+    <input type="button" value="JSON">
+    <input type="button" value="XML">
+    <div id="disp"></div>
+    <script>
+
+        let v_btn = document.querySelector('input');
+        let v_btn2 = document.querySelectorAll('input')[1];
+        let v_btn3 = document.querySelectorAll('input')[2];
+        let v_btn4 = document.querySelectorAll('input')[3];
+        let v_disp = document.querySelector('#disp');
+
+        v_btn4.addEventListener('click', function () {
+
+            // AJAX로 XML데이터 가져와서 콘솔로 찍어보기
+            let ajax = new XMLHttpRequest();
+            ajax.open('get', 'test.xml');
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    // console.log(ajax.responseText); // xml을 문자열로 받으면 정보처리가 까다로움
+                    console.log(this.responseXML);
+                    f_xml(this.responseXML); // 함수로 인자 전달
+                }
+            };
+            ajax.send();
+        });
+
+        function f_xml(p_xml) {
+
+            // let data = document.querySelector('friend'); // null, document에는 friend요소 없어요
+            let data = p_xml.querySelectorAll('friend'); // null, document에는 friend요소 없어요
+            console.log("??? >> ", data[0].children[2].textContent); // 낚시왕
+
+            let v_tbl = "<table border=1>";
+
+            v_tbl += "<tr><td>이름</td><td>타입</td><td>별명</td></tr>";
+
+            console.log(data.length)
+            for (let i = 0; i < data.length; i++) {
+                v_tbl += "<tr>";
+                // data.children의 배열정보로 세부속성 표현
+                for (let j = 0; j < data[i].children.length; j++) {
+                    v_tbl += `<td>${data[i].children[j].textContent}</td>`;
+                }
+                v_tbl += "</tr>";
+            }
+
+            v_tbl += "</table>";
+
+            v_disp.insertAdjacentHTML('beforeend', v_tbl);
+        }
+
+        v_btn3.addEventListener('click', function () {
+
+            // AJAX로 JSON데이터 가져와서 콘솔로 찍어보기
+            let ajax = new XMLHttpRequest();
+            ajax.open('get', 'test.json');
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    console.log(ajax.responseText);
+                    // console.log(typeof this.responseText); // string
+
+                    let jsonObj = JSON.parse(this.responseText); // json=>js객체로 변환
+                    f_json(jsonObj); // 함수 인자로 전달하기
+                }
+            };
+            ajax.send();
+        });
+
+        function f_json(p_json) { // array정보가 들어오고 있어요
+
+            console.log(p_json[0].name); // 뽀로로
+
+            let v_tbl = "<table border=1>";
+
+            console.log(Object.values(p_json)[0]); // key는 index, value는 Object
+            let objs = Object.values(p_json)[0]; // index는 0~3 중에 어떤것을 적용해도 상관없음(=>동일 key보유) 
+            let keyArr = Object.keys(objs);
+            console.log(keyArr);
+
+            v_tbl += `<tr><td>${keyArr[0]}</td><td>${keyArr[1]}</td><td>${keyArr[2]}</td></tr>`;
+            // v_tbl += "<tr><td>이름</td><td>타입</td><td>별명</td></tr>";
+
+            // 내용 추가해서 넣기
+            for (let i = 0; i < p_json.length; i++) {
+                v_tbl += "<tr><td>" + p_json[i].name + "</td>";
+                v_tbl += "<td>" + p_json[i].type + "</td>";
+                v_tbl += "<td>" + p_json[i].alias + "</td></tr>";
+                // v_tbl += `<td>${p_json[i].name}</td><td>${p_json[i].type}</td><td>${p_json[i].alias}</td></tr>`;
+            }
+            v_tbl += "</table>";
+
+            v_disp.insertAdjacentHTML('beforeend', v_tbl);
+        }
+
+        v_btn2.addEventListener('click', function () {
+
+            // ajax로 test.csv데이터 가져와서 콘솔에 찍기
+
+            // 1. 객체 생성
+            let v_req = new XMLHttpRequest();
+
+            // 2. 요청정보 설정
+            v_req.open('get', 'test.csv');
+
+            // 4. 성공코드 가져와서 출력
+            v_req.onreadystatechange = function () {
+                if (v_req.readyState == 4 && v_req.status == 200) {
+                    // 응답결과를 responseText로 받아서 출력할 수 있음
+                    console.log(v_req.responseText);
+                    f_csv(v_req.responseText);
+                }
+            };
+            // 3. 요청데이터 전송
+            v_req.send();
+        });
+
+        function f_csv(p_csv) {
+            let v_lines = p_csv.split("\n"); // 배열정보(행)
+            console.log(v_lines[1]); // 제목 하위 첫째줄(원령공주)
+
+            v_tbl = "<table border=1>";
+            for (let i = 0; i < v_lines.length; i++) {
+                v_tbl += "<tr>";
+                let v_cell = v_lines[i].split(","); // 배열정보(셀)
+
+                for (let j = 0; j < v_cell.length; j++) {
+                    v_tbl += "<td>" + v_cell[j] + "</td>";
+                }
+                v_tbl += "</tr>";
+            }
+            v_tbl += "</table>";
+            // v_disp.innerHTML = v_tbl;
+            v_disp.insertAdjacentHTML('beforeend', v_tbl);
+        }
+
+        // v_btn.onclick = function(){};
+        v_btn.addEventListener('click', function () {
+
+            // AJAX문법 작성하기
+
+            // 1. 객체 생성하기
+            let req = new XMLHttpRequest();
+
+            // 2. open() 설정정보 지정
+            req.open('get', '../0425/dummy.txt', true);
+
+            // 4. onreadystatechange 이용해서 readyState값, status 받기
+            // id=disp공간에 데이터 출력해보기 - responseText
+            req.onreadystatechange = function () {
+                if (req.readyState == 4 && req.status == 200) {
+                    v_disp.innerText = req.responseText;
+                }
+            }
+
+            // 3. send()이용해서 서버로 데이터 전송하기
+            req.send();
+        });
+
+    </script>
+</body>
+
+</html>

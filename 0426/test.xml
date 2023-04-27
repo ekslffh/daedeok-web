@@ -1,0 +1,22 @@
+<friends>
+    <friend>
+        <name>포비</name>
+        <type>백곰</type>
+        <alias>낚시왕</alias>
+    </friend>
+    <friend>
+        <name>해리</name>
+        <type>벌새</type>
+        <alias>가수왕</alias>
+    </friend>
+    <friend>
+        <name>로디</name>
+        <type>로봇</type>
+        <alias>천하장사</alias>
+    </friend>
+    <friend>
+        <name>패티</name>
+        <type>펭귄</type>
+        <alias>댄스왕</alias>
+    </friend>
+</friends>
