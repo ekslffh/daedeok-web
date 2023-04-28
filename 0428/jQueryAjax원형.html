@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // {{},{}}
+
+    let kor = {}; // 빈 객체
+    kor.seoul = {};
+    kor.daejeon = {};
+    kor.seoul.yujin = "서울 유진";
+    kor.daejeon.yujin = "대전 유진";
+
+    let $ = {};
+    $.ajax = function(p_arg) {
+        let req = new XMLHttpRequest();
+        // open(method, url, async)
+        req.open(p_arg.b, p_arg.a, true);
+        req.onreadystatechange = function() {
+            if (req.readyState == 4 && req.status == 200) {
+                // console.log(req.responseText);
+                p_arg.c(req.responseText);
+            }
+        };
+        req.send();
+    };
+
+    $.ajax({
+        a: '../0425/dummy.txt',
+        b: 'get',
+        // data: '',
+        c: function(rst) {
+            console.log("결과 출력 >>", rst);
+        },
+        // d: function(xhr) {},
+        e: ''
+    });
+
+</script>

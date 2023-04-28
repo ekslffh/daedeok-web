@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+<script>
+    
+    // text
+    let result = axios({
+        method: 'get',
+        url: '../0425/dummy.txt'
+    });
+
+    // console.log(result);
+    // result.then(rst => console.log(rst.data));
+    result.then(function(rst) {
+        console.log(rst.data); // 맛점하세요
+    });
+
+    // json
+    axios({
+        method: 'get',
+        url: '../0426/test.json'
+    })
+    .then(rst => rst.data) // 직전 코드에서 값을 반환해야 하며, return키워드 생략가능
+    .then(data => console.log(data)); // 다음 메소드에서 값 전달받을때
+
+    // xml
+    axios({
+        method: 'get',
+        url: '../0426/test.xml'
+    }).then(a => a.data)
+    .then(data => {
+        let x2js = new X2JS();
+        return x2js.xml_str2json(data);
+    }).then( result => console.log(result.friends.friend[0].name)); // 포비
+    
+</script>

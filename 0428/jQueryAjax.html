@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    // jQuery방식 AJAX작성
+
+    $.ajax({
+        url: '../0425/dummy.txt',
+        method: 'get', // 개발 당시 더 먼저 만들어진 속성 - type
+        // data: '',
+        async: false, // 동기방식(순차적)으로 처리 요청
+        success: function(rst){
+            console.log("넘어온 데이터 >>", rst);
+        },
+        error: function(xhr){
+            alert("에러발생 >> " + xhr.status); // 에러코드 확인
+        },
+        // ,dataType: 'text' // 응답정보에 대한 데이터 타입을 지정
+    });
+
+
+    /* 
+        jQuery AJAX 단축메뉴 - 속성에 대한 값만 대입하고 결과를 빠르게 얻는다
+        error상태를 확인할 수 없기 때문에 익숙해지고 나서 사용할 것을 권장
+
+        $.get(url, data, success, dataType)
+        $.post(url, data, success, dataType)
+        $.getJSON(url, data, success)
+    */
+
+   $.post(
+        '../0426/test.json',
+        function(rst) {
+            console.log("단축으로 데이터 얻음 >>", rst);
+        }
+        ,'json' // json데이터를 자동파싱해서 js객체로 반환하는 역할
+   )
+</script>
