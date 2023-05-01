@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="뉴스 가져오기">
+
+    <script>
+
+        let btn = document.querySelector('input');
+        btn.addEventListener('click', function () {
+            // 객체 생성
+            let req = new XMLHttpRequest();
+            // 요청정보 설정 url => 복사한 url 붙이기
+            req.open('get', 'https://news.google.com/rss/search?hl=ko&gl=KR&ceid=KR%3Ako&oc=11&q=%EB%93%9C%EB%A6%BC');
+            // 응답데이터 받기
+            req.onreadystatechange = function () {
+                if (req.readyState == 4 && req.status == 200) {
+                    console.log(req.responseText); // ?
+                }
+            }
+            // 요청정보 전달
+            req.send();
+        });
+
+    </script>
+</body>
+
+</html>

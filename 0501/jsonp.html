@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body></body>
+<script>
+
+/*
+    JSONP(JSON with Padding)
+    동일출처정책(SOP) 우회 방법(편법) - <script>요소를 이용해서 데이터를 가져오는 방식
+    
+    HTML는 Cross Origin정책을 적용
+    ㄴ 요소를 통해 리소스를 받아올 수 있는데, 외부 서버에서 js파일을 읽듯 요청 결과를
+        json형식으로 바꿔오는 편법을 이용한다
+        받아오는 데이터는 text(string)로 되어 있으며, 서버에서  제공해야 사용가능
+
+    현재는 보안적인 문제로 CORS로 대체되었음
+*/
+
+function jsonFlickrFeed(p_arg) {
+    console.log(p_arg.items); // json형태로 제공하는 text데이터
+
+    for (let i = 0; i < p_arg.items.length; i++) {
+        let src = p_arg.items[i].media.m;
+
+        let v_img = document.createElement('img');
+        v_img.src = src;
+        v_img.width = 100;
+        document.body.appendChild(v_img);
+    }
+
+}
+
+
+</script>
+<script src="https://www.flickr.com/services/feeds/photos_public.gne?format=json&tags=yunakim"></script>

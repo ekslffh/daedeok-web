@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+<script>
+
+    $.ajax({
+        url: 'http://cors-anywhere.herokuapp.com/https://news.google.com/rss/search?hl=ko&gl=KR&ceid=KR%3Ako&oc=11&q=%EB%93%9C%EB%A6%BC',
+        // type: '', // get방식일 때는 생략가능, js는 필수로 넣어야함
+        // data: '',
+        success: function(data) {
+            console.log("성공시 데이터가 매개변수로 들어옴>>", data);
+
+            let x2js = new X2JS();
+            let json = x2js.xml_str2json(data);
+            console.log(json);
+        },
+        error: function(xhr) {
+            alert("에러상태>> " + xhr.status)
+        },
+        dataType: ''
+    })
+
+    
+</script>
