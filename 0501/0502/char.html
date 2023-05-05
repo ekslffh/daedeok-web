@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    type: 'bar',
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: ['red', 'blue', 'yellow', 'green', 'purple', 'orange'],
+                    borderWidth: 1
+                },
+                {
+                    type: 'line',
+                    label: '# of Votes',
+                    data: [22, 9, 93, 25, 12, 3],
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // 상위 type의 정보는 접근 불가, undefined 
+        console.log(chart.type); // x
+        console.log(chart.config.type); // 
+        // 하위 발생되는 여러 그래프의 타입으로 값 접근
+        console.log(chart.data.datasets[0].type);
+        console.log(chart.data.datasets[1].data);
+    </script>
+</body>
+
+</html>

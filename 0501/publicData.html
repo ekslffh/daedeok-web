@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    $.ajax({
+        url: 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?servicekey=BWmh5f2E6iaotCKb62QKk6gZd%2B%2FC28KecLxvGJAlePXuKmeYwEbXebbFfBHX9yNqzIYHn86qR26VEAxaKjuHgQ%3D%3D&'
+            + 'serviceKey=BWmh5f2E6iaotCKb62QKk6gZd%2B%2FC28KecLxvGJAlePXuKmeYwEbXebbFfBHX9yNqzIYHn86qR26VEAxaKjuHgQ%3D%3D'
+            + '&sidoName=대전&numOfRows=50',
+        success: function(rst) {
+            // console.log("넘어온 데이터 >>", rst);
+            let x2js = new X2JS();
+            let data = x2js.xml_str2json(rst);
+            let arr = data.response.body.items.item;
+            console.log(arr);
+
+            let tbl = "<table border=1>";
+            tbl += "<tr><th>" + "동" + "</th></tr>";
+            for (let i = 0; i < arr.length; i++) {
+                tbl += "<tr><td>" + arr[i].stationName + "</td></tr>";
+            }
+            tbl += "</table>";
+
+            document.body.insertAdjacentHTML('beforeend', tbl);
+
+        },
+        error: function(xhr) {
+            alert("에러발생>> " + xhr.status); // 에러코드 확인
+        },
+        dataType: 'text'
+    });
+
+</script>

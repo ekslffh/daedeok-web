@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <button>데이터와 타입 업데이트</button>
+    <button>랜덤색 설정</button>
+    <button>ajax로 데이터 가져오기</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['캠벨얼리', '거봉', '샤인머스켓', '기타'],
+                datasets: [{
+                    type: 'doughnut',
+                    label: '# 2016',
+                    data: [61.4, 23.8, 1.9, 12.9],
+                    backgroundColor: ['violet', 'lime', 'purple', 'green'],
+                    borderWidth: 1
+                },
+                {
+                    type: 'pie',
+                    label: '# 2021',
+                    data: [36.6, 21.0, 31.6, 10.8],
+                    backgroundColor: ['gold', 'yellow', 'orange', 'salmon'],
+                    borderWidth: 3,
+                    borderColor: 'orange'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        let v_btn = document.querySelectorAll('button');
+
+        // 데이터, 타입 업데이트
+        v_btn[0].addEventListener('click', function() {
+
+            let data1 = [];
+            let data2 = [];
+            for (let i = 1; i <= chart.data.labels.length; i++) {
+                let ranVal = parseFloat(Math.random() * 100).toFixed(1);
+                data1.push(ranVal);
+                ranVal = parseFloat(Math.random() * 100).toFixed(1);
+                data2.push(ranVal);
+            }
+            // 데이터 변경
+            chart.data.datasets[0].data = data1;
+            chart.data.datasets[1].data = data2;
+
+            // 타입 변경
+            let v_type = ['bar', 'line', 'pie', 'radar', 'doughnut'];
+
+            let ranSu = Math.floor(Math.random() * v_type.length);
+            chart.data.datasets[0].type = v_type[ranSu]; // 타입을 랜덤으로 지정
+            ranSu = Math.floor(Math.random() * v_type.length);
+            chart.data.datasets[1].type = v_type[ranSu];
+
+            chart.update(); // 결과반영
+        });
+
+        // 랜덤색 설정
+        v_btn[1].addEventListener('click', function() {
+            chart.data.datasets[0].backgroundColor = f_color();
+                // = ['black', 'gray', 'lightgray', 'navy']; // 랜덤색 변경필요
+            chart.data.datasets[1].backgroundColor = f_color(); // 함수의 반환값 적용
+                
+            chart.update();
+        });
+
+        // 0~255범위 랜덤수를 만들어내는 함수
+        function f_256() {
+            return Math.floor(Math.random() * 256);
+        }
+
+        function f_color() {
+            // let color = ['black', 'gray', 'lightgray', 'navy'];
+
+            // 4가지 램덤색을 담아낼 수 있는 배열 공간
+            let v_colors = [];
+            let v_rgb = ""; // 10진수로 생성한 랜덤값을 담을 공간
+
+            for (let i = 0; i < 4; i++) {
+                // v_rgb = "rgb(" + f_256() + "," + f_256() + "," + f_256() + ")"; // 하나의 색상코드 완성
+                v_rgb = `rgb(${f_256()},${f_256()},${f_256()})`; // 하나의 색상코드 완성
+                v_colors.push(v_rgb); // 배열에 4개의 색상코드 담기
+            }
+            return v_colors;
+        }
+
+        v_btn[2].addEventListener('click', function() {
+
+            // 1객체생성
+            let req = new XMLHttpRequest();
+            // 2요청정보 설정 url - sample.json가져와서 콘솔로 찍어내기
+            req.open('get', '../../js/json/sample.json');
+            // 4응답받기
+            req.onreadystatechange = function() {
+                if (req.readyState == 4 && req.status == 200) {
+                    // console.log(req.responseText);
+                    let data = JSON.parse(req.responseText);
+                    console.log(data);
+                    f_updateChart(data); // 함수 인자로 전달
+                }
+            };
+            // 3요청정보 전달
+            req.send();
+        });
+
+        function f_updateChart(p_data) { // labels, label, type, score
+            // console.log(p_data.type); // doughnut
+
+            chart.data.lables = p_data.labels;
+            
+            // 배열 값 일부분 수정 또는 삭제 - splice(idx, 지울갯수, 추가a, 추가b, ...)
+            chart.data.datasets.splice(1, 1);
+            chart.data.datasets[0].label = p_data.label;
+            chart.data.datasets[0].type = p_data.type;
+            chart.data.datasets[0].score = p_data.score;
+
+            chart.update();
+        }
+
+    </script>
+</body>
+
+</html>

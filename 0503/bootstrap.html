@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 
+        반응형 - 웹 사이트에 접속하는 디스플레이 종류에 따라 화면 크기가 자동으로 변하게 만드는 속성 
+        데스크탑에 기반하여 설계된 웹 페이지를 모바일로 접근하여 볼 경우 내용이 너무 작게 보이므로
+        장치에 따른 최적화된 페이지를 보여주기 위한 viewport설정이 필요하다
+        width=device-width - 페이지 너비를 장치 너비로 설정함
+        initial-scale=1.0 - 초기화면 배율 설정 1.0 => 100%로 화면을 표시함
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* |= : container이거나 container- */
+        div[class |=container] {
+            border: 2px solid gold;
+            margin: 10px;
+        }
+
+        div[class |=col] {
+            border: 2px solid green;
+            padding: 10px;
+        }
+    </style>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <!-- .container : 레이아웃 구성시 가장 상위에 적용하는 요소 클래스/ 컨텐츠 래핑에 필요한 요소 -->
+    <div class="container">
+        가로 해상도에 따라 너비 값 변화 <br>
+        768미만(xs) 100% / 768px이상(sm) - 720px(100%)
+        992px이상(md) - 960px(100%) / 1200px이상(lg)-1140px(100%)
+    </div>
+    <div class="container-fluid">
+        가로 해상도 관계없이 너비를 100%로 표현
+    </div>
+
+    <!-- grid system : 한 행에 최대 12개의 열(cell, column)을 허용 / 그룹핑하여 넓은 열 생성 가능 -->
+    <!-- xs, sm, md, lg : 각 클래스별 기준 너비보다 해상도가 작을 경우 그리드시스템이 깨져보일 수 있음 주의 -->
+    <div class="container-fluid">
+        <!-- 행 생성 -->
+        <div class="row">
+            <div class="col-lg-6"></div>
+            <div class="col-lg-6"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-3"></div>
+            <div class="col-xs-3"></div>
+            <div class="col-xs-3"></div>
+        </div>
+    </div>
+
+    <!-- data-backdrop="static/true(default)/false" -->
+    <!-- <button type="button" class="btn btn-primary btn-md" 
+    data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+    <button type="button" class="btn btn-primary btn-md">Open Modal</button>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" 
+                    data-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-default">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+    $('button').on('click', function() {
+        // modalId.modal()
+        // $('#myModal').modal('show');
+        $('#myModal').modal({
+            'backdrop':"false"
+        });
+    });
+
+    $('.modal-footer button').on('click', function() {
+        $('#myModal').modal('hide');
+    });
+</script>
+</body>
+
+</html>

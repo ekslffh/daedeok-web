@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    $.ajax({
+        url: 'https://apis.data.go.kr/6300000/GetBycpListService/getBycpList',
+        data: {
+            serviceKey : 'BWmh5f2E6iaotCKb62QKk6gZd+/C28KecLxvGJAlePXuKmeYwEbXebbFfBHX9yNqzIYHn86qR26VEAxaKjuHgQ==',
+            numOfRows : 30,
+            pageNo : 1,
+            type : 'json'
+        },
+        success: function(rst) {
+            console.log("넘어온 데이터 >>", rst);
+            let data = rst.response.body.items.item;
+            console.log(data);
+            let title = "<h2>대전광역시_자전거도로조회</h2>";
+            let tbl = "<table border=1>";
+            tbl += "<tr><th>자전거도로명</th><th>구</th><th>주소</th></tr>";
+            for (let i = 0 ; i < data.length; i++) {
+                tbl += "<tr><td>" + data[i].ROAD_ROUTE_NM + "</td>";
+                tbl += "<td>" + data[i].SIGNGU_NM + "</td>";
+                tbl += "<td>" + data[i].ROAD_ST_POINT + "</td></tr>";
+            }
+            tbl += "</table>";
+
+            document.body.insertAdjacentHTML('beforeend', title);
+            document.body.insertAdjacentHTML('beforeend', tbl);
+        },
+        error: function(xhr) {
+            alert("에러발생>> " + xhr.status); // 에러코드 확인
+        },
+        // dataType: 'text'
+    });
+
+</script>
